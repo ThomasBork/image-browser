@@ -1,0 +1,29 @@
+.image-browser-content {
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .images-container {
+    .image-container {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 100%;
+      }
+
+      .image-text {
+        width: 50%;
+        left: 50%;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        border: 1px solid grey;
+        background-color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="input-container">
+  <span class="label">Search query</span>
+  <input 
+    type="text" 
+    [(ngModel)]="searchQuery" 
+    (blur)="searchForImages()"
+    (keyup.enter)="searchForImages()"
+  />
+</div>
+<div class="input-container">
+  <span class="label">Text location</span>
+  <select [(ngModel)]="textLocation">
+    <option [ngValue]="eTextLocation.OnImageCenterTop">On image - Center top</option>
+    <option [ngValue]="eTextLocation.OnImageCenterBottom">On image - Center bottom</option>
+    <option [ngValue]="eTextLocation.BelowImageCenter">Below image - Center</option>
+  </select>
+</div>
+<div class="image-browser-content">
+  <div class="buttons">
+    <button 
+      [disabled]="!canLoadPreviousImages"
+      (click)="loadPreviousImages()"
+    >&lt;</button>
+    <button 
+      [disabled]="!canLoadNextImages"
+      (click)="loadNextImages()"
+    >&gt;</button>
+  </div>
+  <div
+    class="images-container"
+  >
+    <span
+      *ngFor="let image of images"
+      class="image-container"
+      [style.width]="isMobile ? '100%' : '33%'"
+    >
+      <img 
+        [src]="image.url"
+        [title]="image.title"
+      />
+      <span 
+        class="image-text"
+        [style.top]="textLocation === eTextLocation.OnImageCenterTop ? 0 : undefined"
+        [style.bottom]="textLocation === eTextLocation.OnImageCenterBottom ? 0 : undefined"
+        [style.position]="textLocation === eTextLocation.BelowImageCenter ? undefined : 'absolute'"
+        [style.transform]="textLocation === eTextLocation.BelowImageCenter ? undefined : 'translateX(-50%)'"
+      >{{image.title}}</span>
+    </span>
+  </div>
+</div>
